@@ -12,6 +12,7 @@ fileprivate func which(_ command: String) throws -> URL {
         task.launchPath = url.path
     }
 
+    task.environment = ["PATH":"/usr/bin:/usr/local/bin"]
     task.arguments = [command.trimmingCharacters(in: .whitespacesAndNewlines)]
 
     let pipe = Pipe()
