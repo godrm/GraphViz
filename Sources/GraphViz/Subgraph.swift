@@ -1,7 +1,15 @@
 import struct Foundation.URL
 
 @dynamicMemberLookup
-public struct Subgraph: Hashable {
+public class Subgraph: Hashable {
+    static public func == (lhs: Subgraph, rhs: Subgraph) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     public var id: String?
 
     public init(id: String? = nil) {
@@ -28,11 +36,11 @@ public struct Subgraph: Hashable {
                 nodes.filter { !$0.attributes.dictionaryValue.isEmpty }.isEmpty
     }
 
-    public mutating func append(_ node: @autoclosure () -> Node) {
+    public func append(_ node: @autoclosure () -> Node) {
         nodes.append(node())
     }
 
-    public mutating func append(_ edge: @autoclosure () -> Edge) {
+    public func append(_ edge: @autoclosure () -> Edge) {
         edges.append(edge())
     }
 

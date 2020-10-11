@@ -3,18 +3,18 @@ import GraphViz
 extension Subgraph {
     typealias Fragment = SubgraphBuilder.Fragment
 
-    public init(id: String? = nil, @SubgraphBuilder _ builder: () -> SubgraphMember) {
+    public convenience init(id: String? = nil, @SubgraphBuilder _ builder: () -> SubgraphMember) {
         self.init(id: id)
         append(typeErased: builder())
     }
 
-    private mutating func append(_ fragment: Fragment) {
+    private func append(_ fragment: Fragment) {
         for member in fragment.members {
             append(typeErased: member)
         }
     }
 
-    private mutating func append(typeErased member: SubgraphMember) {
+    private func append(typeErased member: SubgraphMember) {
         switch member {
         case let fragment as Fragment:
             append(fragment)
@@ -28,7 +28,7 @@ extension Subgraph {
         }
     }
 
-    public subscript<T>(dynamicMember member: WritableKeyPath<Attributes, T>) -> (T) -> Self {
+    public subscript<T>(dynamicMember member: WritableKeyPath<Attributes, T>) -> (T) -> Subgraph {
         get {
             var mutableSelf = self
             return { newValue in

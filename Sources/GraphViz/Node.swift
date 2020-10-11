@@ -6,7 +6,15 @@ import struct Foundation.URL
  If a node appears inside a record, it has only the both attributes id and label.
  */
 @dynamicMemberLookup
-public struct Node: Identifiable, Hashable {
+public final class Node: Identifiable, Hashable {
+    public static func == (lhs: Node, rhs: Node) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     /**
      > A unique identifier for a node or a cluster.
 
@@ -403,7 +411,7 @@ extension Node.Attributes {
 // MARK: - ExpressibleByStringLiteral
 
 extension Node: ExpressibleByStringLiteral {
-    public init(stringLiteral value: String) {
+    public convenience init(stringLiteral value: String) {
         self.init(value)
     }
 }
