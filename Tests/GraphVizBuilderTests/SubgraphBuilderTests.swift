@@ -10,14 +10,14 @@ final class SubgraphBuilderTests: XCTestCase {
     let graph = Graph(directed: true, strict: true)
 
     func testSubgraph() {
-        let subgraph = Subgraph {
+        let subgraph = Subgraph(id: "hello") {
             "a" --> "b"
             "a" --> "c"
             "a" --> "d"
         }.rank(.same)
 
         let expected = """
-        subgraph {
+        subgraph hello { label = hello
             rank=same
             a -> b
             a -> c

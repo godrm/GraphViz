@@ -85,6 +85,9 @@ public struct DOTEncoder {
                     components.append(escape(id))
                 }
                 components.append("{")
+                if let id = subgraph.id {
+                    components.append("label = "+escape(id))
+                }
 
                 lines.prepend(components.joined(separator: " "))
                 lines.append("}")
