@@ -81,12 +81,10 @@ public struct DOTEncoder {
                 lines = lines.map { $0.indented(by: indentation) }
 
                 var components = ["subgraph"]
-                if let id = subgraph.id {
-                    components.append(escape(id))
-                }
+                components.append(subgraph.id)
                 components.append("{")
-                if let id = subgraph.id {
-                    components.append("label = "+escape(id))
+                if let label = subgraph.label {
+                    components.append("label = "+escape(label))
                 }
 
                 lines.prepend(components.joined(separator: " "))

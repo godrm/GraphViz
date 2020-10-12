@@ -10,10 +10,12 @@ public class Subgraph: Hashable {
         hasher.combine(id)
     }
     
-    public var id: String?
+    public var id: String
+    public var label: String?
 
-    public init(id: String? = nil) {
+    public init(id: String = "noname", label: String? = nil) {
         self.id = id
+        self.label = label
     }
 
     public private(set) var nodes: [Node] = []

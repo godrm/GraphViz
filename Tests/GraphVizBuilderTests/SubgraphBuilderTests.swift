@@ -17,7 +17,7 @@ final class SubgraphBuilderTests: XCTestCase {
         }.rank(.same)
 
         let expected = """
-        subgraph hello { label = hello
+        subgraph hello {
             rank=same
             a -> b
             a -> c

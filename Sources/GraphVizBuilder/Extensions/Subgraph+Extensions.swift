@@ -3,7 +3,7 @@ import GraphViz
 extension Subgraph {
     typealias Fragment = SubgraphBuilder.Fragment
 
-    public convenience init(id: String? = nil, @SubgraphBuilder _ builder: () -> SubgraphMember) {
+    public convenience init(id: String = "noname", label: String? = nil, @SubgraphBuilder _ builder: () -> SubgraphMember) {
         self.init(id: id)
         append(typeErased: builder())
     }
@@ -39,6 +39,6 @@ extension Subgraph {
     }
 }
 
-public func Cluster(@SubgraphBuilder _ builder: () -> SubgraphMember) -> Subgraph {
+public func Cluster(id: UInt, @SubgraphBuilder _ builder: () -> SubgraphMember) -> Subgraph {
     return Subgraph(id: "cluster", builder)
 }
